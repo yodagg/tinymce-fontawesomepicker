@@ -27,3 +27,6 @@ window.tinymce.init({
 
 # 展示
 ![image](20200520140904.jpg)
+
+# 兼容
+由于代码中用到了`Arrar.from(new Set())`去重，因此不兼容IE。
