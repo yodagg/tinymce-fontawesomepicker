@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tinymce-fontawesomepicker</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.2.2/tinymce.min.js"></script>
+</head>
+<body>
+
+    <textarea></textarea>
+    <script>
+        window.tinymce.init({
+            selector: 'textarea',
+            plugins: 'fontawesomepicker',
+            toolbar: 'fontawesomepicker',
+            external_plugins: {
+                //  插件链接 或者 将fontawesomepicker放在tinymce的plugins目录下自动注册
+                fontawesomepicker: '/tinymce-fontawesomepicker/fontawesomepicker/plugin.js'
+            },
+            fontawesomeUrl: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css'
+        })
+    </script>
+</body>
+</html>
+
+

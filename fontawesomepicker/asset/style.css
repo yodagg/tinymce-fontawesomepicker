@@ -1,0 +1,90 @@
+.tox .mce-fontawesomepicker--body {
+    height: 500px;
+    overflow: hidden;
+}
+
+.tox .mce-fontawesomepicker--aside {
+    width: 150px;
+    height: 100%;
+    float: left;
+}
+
+.tox .mce-fontawesomepicker--content {
+    float: left;
+    width: calc(100% - 150px);
+    height: 100%;
+    padding-left: 10px;
+    box-sizing: border-box;
+}
+
+.tox .mce-fontawesomepicker--nav {
+    width: 100%;
+    height: 100%;
+    font-size: 14px;
+    overflow: hidden;
+    overflow-y: auto;
+}
+
+.tox .mce-fontawesomepicker--nav__item {
+    cursor: pointer;
+    line-height: 20px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.tox .mce-fontawesomepicker--nav__item:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.tox .mce-fontawesomepicker--nav__item.current {
+    color: red
+}
+
+.tox .mce-fontawesomepicker--icons {
+    overflow: auto;
+    height: 100%;
+}
+
+.tox .mce-fontawesomepicker--icon {
+    text-align: center;
+    float: left;
+    width: 12.5%;
+    margin-bottom: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 5px;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: none;
+}
+
+.tox .mce-fontawesomepicker--icon:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.tox .mce-fontawesomepicker--icon i {
+    font-size: 22px;
+    display: block;
+    margin: 0 auto;
+}
+
+.tox .mce-fontawesomepicker--icon span {
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+
+.tox .fab {
+    font-family: 'Font Awesome 5 Brands';
+    font-weight: 400;
+}
+.tox .fa,
+.tox .fas {
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+}
+.tox .far {
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 400;
+}
