@@ -1,5 +1,5 @@
 # tinymce-fontawesomepicker
-tinymce的一个插件，用来选择`fontawesome`图标
+`tinymce v5`的一个插件，用来选择`fontawesome`图标
 
 # 使用方法
 将`fontawesomepicker`文件夹移动至`tinymce`的插件目录下(plugins)，将自动注册插件。
