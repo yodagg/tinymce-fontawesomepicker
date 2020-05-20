@@ -25,7 +25,7 @@ window.tinymce.init({
 })
 ```
 
-# 展示
+# 展示 [example](http://gitpages.wo2.me/tinymce-fontawesomepicker/)
 ![image](20200520140904.jpg)
 
 # 兼容

@@ -55,7 +55,8 @@
 			var html = ''
 			html += '<div class="mce-fontawesomepicker--nav">'
 			for ( var key in categories ) {
-				html += '<div class="mce-fontawesomepicker--nav__item" title="' + key + '">' + key + '</div>'
+				var item = categories[key]
+				html += '<div class="mce-fontawesomepicker--nav__item" title="' + key + '">' + item.label + '</div>'
 			}
 			html += '</div>'
 			return html
