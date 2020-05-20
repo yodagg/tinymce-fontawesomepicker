@@ -138,16 +138,9 @@
 			this.showIcons(category)
 		},
 		insertIcon: function(name) {
-			var el = this.editor.selection.getNode()
-			var text = el && el.innerText
-			var text = tinymce.trim(text)
-			var icon = this.toIconClass(name)
-			var html
-			if ( text ) {
-				html = '<i contenteditable="false" class="'+ icon +'"> </i>'
-			} else {
-				html = '<i contenteditable="false" class="'+ icon +'">&nbsp;</i>'
-			}
+            var icon = this.toIconClass(name)
+            //  空标签会被自动删除，用一个 . 占位
+			var html = '<span><span style="font-size:0">.</span><span contenteditable="false" class="'+ icon +'"></span></span>'
 			this.editor.execCommand('mceInsertContent', false, html)
 			this.editor.windowManager.close()
 		}
@@ -179,7 +172,8 @@
 	}
 
 	function settingManager(editor) {
-
+        editor.settings.extended_valid_elements = editor.settings.extended_valid_elements || ''
+        editor.settings.extended_valid_elements += ',span[*]'
 	}
 
 	function Plugin() {
