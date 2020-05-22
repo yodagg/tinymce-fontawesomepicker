@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>tinymce-fontawesomepicker</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.2.2/tinymce.min.js"></script>
+    <script src="https://unpkg.com/tinymce@5.3.0/tinymce.min.js"></script>
 </head>
 <body>
 
@@ -13,15 +13,14 @@
         window.tinymce.init({
             selector: 'textarea',
             plugins: 'fontawesomepicker',
-            toolbar: 'fontawesomepicker',
+            toolbar: 'fontawesomepicker forecolor backcolor fontsizeselect formatselect',
+            fontsize_formats: '12px 14px 16px 18px 24px 36px',
             external_plugins: {
                 //  插件链接 或者 将fontawesomepicker放在tinymce的plugins目录下自动注册
                 fontawesomepicker: '/tinymce-fontawesomepicker/fontawesomepicker/plugin.js'
             },
-            fontawesomeUrl: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css'
+            fontawesomeUrl: 'https://www.unpkg.com/@fortawesome/fontawesome-free@5.13.0/css/all.min.css'
         })
     </script>
 </body>
 </html>
-
-

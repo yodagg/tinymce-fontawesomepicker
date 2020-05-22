@@ -1,13 +1,14 @@
 /**
  * build categories.json
+ * toPath fontawesomepicker/asset/categories.json
  */
 
 const fs = require('fs')
 const path = require('path')
 const yamljs = require('yamljs')
 
-const rawIcons = require('../fontawesome-free-5.11.2-web/metadata/icons.json')
-const rawCategories = yamljs.parse(fs.readFileSync('../fontawesome-free-5.11.2-web/metadata/categories.yml', 'utf-8'))
+const rawIcons = yamljs.parse(fs.readFileSync('./node_modules/@fortawesome/fontawesome-free/metadata/icons.yml', 'utf-8'))
+const rawCategories = yamljs.parse(fs.readFileSync('./node_modules/@fortawesome/fontawesome-free/metadata/categories.yml', 'utf-8'))
 
 
 function getCategories(name) {

@@ -13,6 +13,14 @@
 		doc.head.appendChild(link)
 	}
 
+	function unique(arr) {
+		const hash = {}
+		arr.forEach(function(val) {
+			hash[val] = 1
+		})
+		return Object.keys(hash)
+	}
+
 	function formatCategories(data) {
 		categories.all = {
 			icons: [],
@@ -22,7 +30,7 @@
 			categories.all.icons = categories.all.icons.concat(data[key].icons)
 			categories[key] = data[key]
 		}
-		categories.all.icons = Array.from(new Set(categories.all.icons))
+		categories.all.icons = unique(categories.all.icons)
 	}
 
 	function fetchCategories(pluginUrl) {
@@ -62,10 +70,11 @@
 			return html
 		},
 		renderIcons: function() {
+			var that = this
 			var html = ''
 			html += '<div class="mce-fontawesomepicker--icons">'
-			html += categories.all.icons.reduce((ret, name) =>{
-				var icon = this.toIconClass(name)
+			html += categories.all.icons.reduce(function(ret, name) {
+				var icon = that.toIconClass(name)
 				ret += '<div class="mce-fontawesomepicker--icon" title="'+ name +'">'
 				ret += '	<i class="'+ icon +'"></i>'
 				ret += '	<span>'+ name +'</span>'
