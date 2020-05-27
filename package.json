@@ -1,0 +1,13 @@
+{
+    "name": "tinymce-fontawesomepicker",
+    "version": "0.0.1",
+    "description": "tinymce v5的一个插件，用来选择fontawesome图标。",
+    "main": "index.js",
+    "keywords": [
+        "tinymce",
+        "fontawesome",
+        "icons"
+    ],
+    "author": "ZCOM",
+    "license": "MIT"
+}

@@ -46,10 +46,10 @@ window.tinymce.init({
 # 说明
 目前存在一些问题，我没有好的解决方案。
 1. 图标不能像字体一样被选中
-2. 生成的图标代码过多，由于tinymce限制，无法添加空标签 例子:`<span class="fa fa-xxx"></span>`，所以我将它做成了如下，利用一个不显示的`.`来占位。
+2. 生成的图标代码过多，由于tinymce限制，无法添加空标签 例子:`<span class="fa fa-xxx"></span>`，所以我将它做成了如下，利用不显示的`<!-- . -->`来占位。
     ```html
     <span>
-        <span style="display:none">.</span>
+        <!-- . -->
         <span class="fa fa-xxx"></span>
     </span>
     ```

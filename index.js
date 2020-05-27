@@ -1,0 +1,1 @@
+require('./fontawesomepicker/plugin.js')

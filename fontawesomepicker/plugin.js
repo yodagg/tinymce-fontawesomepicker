@@ -149,8 +149,8 @@
 		},
 		insertIcon: function(name) {
             var icon = this.toIconClass(name)
-            //  空标签会被自动删除，用一个 . 占位
-			var html = '<span><span style="display:none;">.</span><span contenteditable="false" class="'+ icon +'"></span></span>'
+            //  空标签会被自动删除，用<!-- . -->占位
+			var html = '<span><!-- . --><span contenteditable="false" class="'+ icon +'"></span></span>'
 			this.editor.execCommand('mceInsertContent', false, html)
 			this.editor.windowManager.close()
 		}
