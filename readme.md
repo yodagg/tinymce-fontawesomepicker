@@ -1,32 +1,41 @@
 # tinymce-fontawesomepicker
-`tinymce v5`的一个插件，用来选择`fontawesome`图标。
+A plugin for `tinymce v5` that selects the `fontawesome` icon.
+
+[example](http://gitpages.wo2.me/tinymce-fontawesomepicker/)
 
 
-# 使用方法
-将`fontawesomepicker`文件夹移动至`tinymce`的插件目录下(plugins)，将自动注册插件。
-```js
-window.tinymce.init({
-    selector: 'textarea',
-    plugins: 'fontawesomepicker',
-    toolbar: 'fontawesomepicker',
-    fontawesomeUrl: 'https://www.unpkg.com/@fortawesome/fontawesome-free@5.13.0/css/all.min.css'
-})
-```
-或者通过链接的方式加载`fontawesomepicker`插件
-```js
-window.tinymce.init({
-    selector: 'textarea',
-    plugins: 'fontawesomepicker',
-    toolbar: 'fontawesomepicker',
-    external_plugins: {
-        //  插件链接
-        fontawesomepicker: '/tinymce-fontawesomepicker/fontawesomepicker/plugin.js'
-    },
-    fontawesomeUrl: 'https://www.unpkg.com/@fortawesome/fontawesome-free@5.13.0/css/all.min.css'
-})
-```
+# usage
+- Move the `fontawesomepicker` folder to `tinymce/plugins`
+    ```js
+    window.tinymce.init({
+        selector: 'textarea',
+        plugins: 'fontawesomepicker',
+        toolbar: 'fontawesomepicker',
+        fontawesomeUrl: 'https://www.unpkg.com/@fortawesome/fontawesome-free@5.13.0/css/all.min.css'
+    })
+    ```
 
-# fontawesome
+- url `fontawesomepicker`
+    ```js
+    window.tinymce.init({
+        selector: 'textarea',
+        plugins: 'fontawesomepicker',
+        toolbar: 'fontawesomepicker',
+        fontawesomeUrl: 'https://www.unpkg.com/@fortawesome/fontawesome-free@5.13.0/css/all.min.css',
+        external_plugins: {
+            //  url
+            fontawesomepicker: 'https://www.unpkg.com/tinymce-fontawesomepicker/fontawesomepicker/plugin.js'
+        },
+    })
+    ```
+
+- npm
+    ```bash
+    npm i -S tinymce-fontawesomepicker
+    ```
+
+
+# fontawesome v5.13.0
 当前插件使用的fontawesome版本为`5.13.0`，建议你也使用此版本。
 若使用其他版本可能会导致选择窗口展示的图标和实际图标对不上，这是因为当前插件会加载一个`fontawesome 5.13.0`版本的[图标分类文件](fontawesomepicker/asset/categories.json)。
 
