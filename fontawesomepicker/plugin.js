@@ -76,7 +76,7 @@
 			html += categories.all.icons.reduce(function(ret, name) {
 				var icon = that.toIconClass(name)
 				ret += '<div class="mce-fontawesomepicker--icon" title="'+ name +'">'
-				ret += '	<i class="'+ icon +'"></i>'
+				ret += '	<span><i class="'+ icon +'"></i></span>'
 				ret += '	<span>'+ name +'</span>'
 				ret += '</div>'
 				return ret

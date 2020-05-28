@@ -63,16 +63,28 @@
     background-color: rgba(0, 0, 0, 0.1);
 }
 
-.tox .mce-fontawesomepicker--icon i {
-    font-size: 22px;
+.tox .mce-fontawesomepicker--icon span {
     display: block;
     margin: 0 auto;
-}
-
-.tox .mce-fontawesomepicker--icon span {
+    text-align: center;
     font-size: 12px;
     white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
+
+.tox .mce-fontawesomepicker--icon span:first-child {
+    font-size: 22px;
+}
+
+
+@media only screen and (max-width: 767px) {
+    .tox .mce-fontawesomepicker--icon {
+        width: 20%;
+    }
+}
+
+
 
 
 .tox .fab {
