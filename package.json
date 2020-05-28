@@ -9,5 +9,11 @@
         "icons"
     ],
     "author": "ZCOM",
-    "license": "MIT"
+    "license": "MIT",
+    "scripts": {
+        "publish": "npm publish",
+        "patch": "npm version patch & npm publish",
+        "minor": "npm version minor & npm publish",
+        "major": "npm version major & npm publish"
+    }
 }
