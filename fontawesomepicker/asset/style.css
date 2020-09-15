@@ -17,12 +17,66 @@
     box-sizing: border-box;
 }
 
+.tox .mce-fontawesomepicker--toolbar {
+    height: 60px;
+}
+
+.tox .mce-fontawesomepicker--color,
+.tox .mce-fontawesomepicker--size {
+    height: 30px;
+}
+
+.tox .mce-fontawesomepicker--color span,
+.tox .mce-fontawesomepicker--size span {
+    font-size: 14px;
+}
+
+.tox .mce-fontawesomepicker--color input,
+.tox .mce-fontawesomepicker--size input {
+    font-size: 12px;
+    float: right;
+}
+
+.tox .mce-fontawesomepicker--color input {
+    width: 45px;
+    height: 30px;    
+}
+
+.tox .mce-fontawesomepicker--size input {
+    border: 1px solid #ccc;
+    padding: 2px 2px 2px 5px;
+    box-sizing: border-box;
+    width: 60px;
+    height: 25px;
+}
+
+.tox .mce-fontawesomepicker--icons {
+    overflow: auto;
+    height: 100%;
+    border-bottom: 1px solid #eee;
+}
+
+.tox .mce-fontawesomepicker--icon {
+    text-align: center;
+    float: left;
+    width: 12.5%;
+    margin-bottom: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 5px;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: none;
+}
+
+
 .tox .mce-fontawesomepicker--nav {
     width: 100%;
-    height: 100%;
+    height: calc(100% - 70px);
     font-size: 14px;
     overflow: hidden;
     overflow-y: auto;
+    margin-top: 10px;
 }
 
 .tox .mce-fontawesomepicker--nav__item {
@@ -39,24 +93,6 @@
 
 .tox .mce-fontawesomepicker--nav__item.current {
     color: red
-}
-
-.tox .mce-fontawesomepicker--icons {
-    overflow: auto;
-    height: 100%;
-}
-
-.tox .mce-fontawesomepicker--icon {
-    text-align: center;
-    float: left;
-    width: 12.5%;
-    margin-bottom: 10px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    padding: 5px;
-    box-sizing: border-box;
-    cursor: pointer;
-    display: none;
 }
 
 .tox .mce-fontawesomepicker--icon:hover {

@@ -37,6 +37,7 @@ function toNames(name, styles) {
 const data = {}
 
 for ( const name in rawIcons ) {
+    if ( rawIcons[name].private ) break
     const styles = rawIcons[name].styles
     const categories = getCategories(name)
 

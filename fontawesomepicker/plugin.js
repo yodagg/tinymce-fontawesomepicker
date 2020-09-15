@@ -56,6 +56,7 @@
 		this.editor = editor
 		this.pluginUrl = pluginUrl
 		this.$body = ''
+		this.iconStyle = {}
 	}
 
 	Object.assign(Panel.prototype, {
@@ -84,10 +85,45 @@
 			html += '</div>'
 			return html
 		},
+		renderInputColor: function() {
+			var that = this
+			var val = '#000000'
+			var html = ''
+			html += '<div class="mce-fontawesomepicker--color">'
+			html += '	<label>'
+			html += '		<span>Color</span>'
+			html += '		<input type="color" value="'+ val +'">'
+			html += '	</label>'
+			html += '</div>'
+			return html
+		},
+		renderInputSize: function() {
+			var that = this
+			var val = '14'
+			var html = ''
+			html += '<div class="mce-fontawesomepicker--size">'
+			html += '	<label>'
+			html += '		<span>Size</span>'
+			html += '		<input type="number" value="'+ val +'" min="0">'
+			html += '	</label>'
+			html += '</div>'
+			return html
+		},
+		renderToolbar: function() {
+			var that = this
+			var html = ''
+			html += '<div class="mce-fontawesomepicker--toolbar">'
+			html += this.renderInputColor()
+			html += this.renderInputSize()
+			html += '</div>'
+			return html
+		},
+
 		renderBody: function() {
 			if ( this.$body ) return this.$body
 			this.$body += '<div class="mce-fontawesomepicker--body">'
 			this.$body += '	<div class="mce-fontawesomepicker--aside">'
+			this.$body += 		this.renderToolbar()
 			this.$body += 		this.renderNav()
 			this.$body += '	</div>'
 			this.$body += '	<div class="mce-fontawesomepicker--content">'
