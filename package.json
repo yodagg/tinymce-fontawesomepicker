@@ -1,19 +1,22 @@
 {
-    "name": "tinymce-fontawesomepicker",
-    "version": "0.0.1",
-    "description": "tinymce v5的一个插件，用来选择fontawesome图标。",
-    "main": "index.js",
-    "keywords": [
-        "tinymce",
-        "fontawesome",
-        "icons"
-    ],
-    "author": "ZCOM",
-    "license": "MIT",
-    "scripts": {
-        "publish": "npm publish",
-        "patch": "npm version patch & npm publish",
-        "minor": "npm version minor & npm publish",
-        "major": "npm version major & npm publish"
-    }
+  "name": "tinymce-fontawesomepicker",
+  "version": "0.0.1",
+  "repository": "https://github.com/so-diao/tinymce-fontawesomepicker",
+  "description": "A plugin for tinymce5 that selects the fontawesome icon.",
+  "main": "index.js",
+  "keywords": [
+    "tinymce",
+    "fontawesome",
+    "icons",
+    "picker"
+  ],
+  "author": "so-diao",
+  "license": "MIT",
+  "scripts": {
+    "publish": "npm publish",
+    "patch": "npm version patch & npm publish",
+    "minor": "npm version minor & npm publish",
+    "major": "npm version major & npm publish",
+    "build": "node build/index.js"
+  }
 }
