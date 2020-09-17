@@ -15,7 +15,7 @@ A plugin for `tinymce v5` that selects the `fontawesome` icon.
     })
     ```
 
-- url `fontawesomepicker`
+- Url `fontawesomepicker`
     ```js
     window.tinymce.init({
         selector: 'textarea',
@@ -28,10 +28,6 @@ A plugin for `tinymce v5` that selects the `fontawesome` icon.
         },
     })
     ```
-
-
-# browser
-The code USES `fetch`, not compatible with `Internet Explorer`.
 
 
 # preview [example](http://gitpages.wo2.me/tinymce-fontawesomepicker/)

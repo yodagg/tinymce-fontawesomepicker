@@ -51,5 +51,17 @@ for ( const name in rawIcons ) {
     })
 }
 
-const toPath = path.resolve(__dirname, '../fontawesomepicker/asset/categories.json')
-fs.writeFileSync(toPath, JSON.stringify(data))
+// `Others' should be put last 
+const others = data.others
+delete data.others
+data.others = others
+
+
+fs.writeFileSync(
+    path.resolve(__dirname, '../fontawesomepicker/asset/categories.json'),
+    JSON.stringify(data)
+)
+fs.writeFileSync(
+    path.resolve(__dirname, '../fontawesomepicker/asset/categories.js'),
+    `fontawesomepickerCallback(${JSON.stringify(data)})`
+)
