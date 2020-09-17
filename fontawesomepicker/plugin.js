@@ -197,7 +197,8 @@
 
 	var SettingPanel = function (editor) {
 		var target = utils.getRngNode(editor)
-		var rotate = editor.$(target).css('transform').replace(/(matrix|none|\(|\))/g, '')
+		var targetIcon = editor.$(target).children('.mark-fapk')[0]
+		var rotate = editor.$(targetIcon).css('transform').replace(/(matrix|none|\(|\))/g, '')
 		rotate = utils.getmatrix(rotate.split(',').map(parseFloat))
 
 		editor.windowManager.open({
@@ -256,8 +257,8 @@
 			],
 			initialData: {
 				'icon-style': editor.$(target).attr('icon-style') || 'none',
-				'icon-size': editor.$(target).css('font-size'),
-				'icon-color': editor.$(target).css('color') || '',
+				'icon-size': editor.$(targetIcon).css('font-size'),
+				'icon-color': editor.$(targetIcon).css('color') || '',
 				'icon-rotate': rotate + 'deg',
 				'style-color': editor.$(target).attr('style-color') || ''
 			},
@@ -268,7 +269,7 @@
 					'color': data['icon-color']
 				}
 
-				editor.$(target)[0].removeAttribute('style')
+				targetIcon.removeAttribute('style')
 				if (![0, '0', '0deg'].includes(data['icon-rotate'])) {
 					style['display'] = 'inline-block'
 
@@ -280,8 +281,8 @@
 				}
 
 				if ( data['icon-style'] === 'none' ) {
-					editor.$(target)[0].removeAttribute('icon-style')
-					editor.$(target)[0].removeAttribute('style-color')
+					target.removeAttribute('icon-style')
+					target.removeAttribute('style-color')
 				} else {
 					editor.$(target).attr('icon-style', data['icon-style'])
 					editor.$(target).attr('style-color', data['style-color'])
@@ -305,7 +306,7 @@
 							break
 						}
 						case 'rounded-outline': {
-							style['border-radius'] = '5px'
+							style['border-radius'] = '50%'
 							style['border'] = '2px solid ' + data['style-color']
 							break
 						}
@@ -321,7 +322,7 @@
 					}
 				}
 
-				editor.$(target).css(style)
+				editor.$(targetIcon).css(style)
 				// editor.execCommand('mceReplaceContent', false, '')
 				api.close()
 			}
