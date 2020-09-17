@@ -6,45 +6,60 @@
 	var global = tinymce.util.Tools.resolve('tinymce.PluginManager')
 
 	var utils = {
-		loadStyle: function(doc, src) {
+		loadStyle: function (doc, src) {
 			if (doc.querySelector('link[href*="' + src + '"]')) return
 			var link = doc.createElement('link')
 			link.href = src
 			link.rel = 'stylesheet'
 			doc.head.appendChild(link)
 		},
-		unique: function(arr) {
-			var hash = arr.reduce(function(ret, item) {
+		unique: function (arr) {
+			var hash = arr.reduce(function (ret, item) {
 				ret[item] = 1
 				return ret
 			}, {})
 			return Object.keys(hash)
 		},
-		getRngNode: function(editor) {
+		getRngNode: function (editor) {
 			var rng = editor.selection.getRng()
 			var target = rng.startContainer
-			if ( target.nodeType !== 1 ) target = target.parentNode
+			if (target.nodeType !== 1) target = target.parentNode
 			return target
 		},
-		jsonp: function(url, callbackName, callback) {
+		jsonp: function (url, callbackName, callback) {
 			var script = document.createElement('script')
 			script.src = url
 			script.charset = 'utf-8'
 			document.head.appendChild(script)
 			window[callbackName] = callback
-			script.onload = script.onerror = function() {
+			script.onload = script.onerror = function () {
 				delete window[callbackName]
 				script.parentNode.removeChild(script)
 			}
+		},
+		getmatrix(args) {
+			var aa = Math.round(180 * Math.asin(args[0]) / Math.PI)
+			var bb = Math.round(180 * Math.acos(args[1]) / Math.PI)
+			var cc = Math.round(180 * Math.asin(args[2]) / Math.PI)
+			var dd = Math.round(180 * Math.acos(args[3]) / Math.PI)
+			var deg = 0
+			if (aa == bb || -aa == bb) {
+				deg = dd
+			} else if (-aa + bb == 180) {
+				deg = 180 + cc
+			} else if (aa + bb == 180) {
+				deg = 360 - cc || 360 - dd
+			}
+			return deg >= 360 ? 0 : deg
 		}
 	}
 
-	var IconsPanel = function() {
+	var IconsPanel = function () {
 		var categories = {}
 		var bodyHtml = ''
 
 		function initAsset(editor, pluginUrl) {
-			if ( categories.all ) return
+			if (categories.all) return
 			var fontawesomeUrl = editor.getParam('fontawesomeUrl')
 			loadCategories(pluginUrl)
 			utils.loadStyle(document, fontawesomeUrl)
@@ -56,7 +71,7 @@
 			utils.jsonp(
 				pluginUrl + '/asset/categories.js',
 				CALLBACK_NAME,
-				function(data) {
+				function (data) {
 					formatCategories(data)
 				}
 			)
@@ -67,19 +82,19 @@
 				icons: [],
 				label: 'all'
 			}
-			for ( var key in data ) {
+			for (var key in data) {
 				categories.all.icons = categories.all.icons.concat(data[key].icons)
 				categories[key] = data[key]
 			}
 			categories.all.icons = utils.unique(categories.all.icons)
 		}
 
-		return function(editor, pluginUrl) {
+		return function (editor, pluginUrl) {
 			editor.on('init', initAsset.bind(null, editor, pluginUrl))
 
 			return {
 				editor: editor,
-				open: function() {
+				open: function () {
 					editor.windowManager.open({
 						title: 'Icons',
 						size: 'large',
@@ -94,85 +109,85 @@
 					})
 					this.openAfter()
 				},
-				openAfter: function() {
+				openAfter: function () {
 					var that = this
 					that.changeNav('all')
 					editor.$('.mce-fontawesomepicker--nav__item', document)
-					.off('click').on('click', function() {
-						var title = this.getAttribute('title')
-						that.changeNav(title)
-					})
-		
+						.off('click').on('click', function () {
+							var title = this.getAttribute('title')
+							that.changeNav(title)
+						})
+
 					editor.$('.mce-fontawesomepicker--icon', document)
-					.off('click').on('click', function() {
-						var title = this.getAttribute('title')
-						that.insertIcon(title)
-					})
+						.off('click').on('click', function () {
+							var title = this.getAttribute('title')
+							that.insertIcon(title)
+						})
 				},
-				renderNav: function() {
+				renderNav: function () {
 					var html = ''
 					html += '<div class="mce-fontawesomepicker--nav">'
-					for ( var key in categories ) {
+					for (var key in categories) {
 						var item = categories[key]
 						html += '<div class="mce-fontawesomepicker--nav__item" title="' + key + '">' + item.label + '</div>'
 					}
 					html += '</div>'
 					return html
 				},
-				renderIcons: function() {
+				renderIcons: function () {
 					var that = this
 					var html = ''
 					html += '<div class="mce-fontawesomepicker--icons">'
-					html += categories.all.icons.reduce(function(ret, name) {
+					html += categories.all.icons.reduce(function (ret, name) {
 						var icon = that.toIconClass(name)
-						ret += '<div class="mce-fontawesomepicker--icon" title="'+ name +'">'
-						ret += '	<span><i class="'+ icon +'"></i></span>'
-						ret += '	<span>'+ name +'</span>'
+						ret += '<div class="mce-fontawesomepicker--icon" title="' + name + '">'
+						ret += '	<span><i class="' + icon + '"></i></span>'
+						ret += '	<span>' + name + '</span>'
 						ret += '</div>'
 						return ret
 					}, '')
 					html += '</div>'
 					return html
 				},
-				renderBody: function() {
-					if ( bodyHtml ) return bodyHtml
+				renderBody: function () {
+					if (bodyHtml) return bodyHtml
 					bodyHtml += '<div class="mce-fontawesomepicker--body">'
 					bodyHtml += '	<div class="mce-fontawesomepicker--aside">'
-					bodyHtml += 		this.renderNav()
+					bodyHtml += this.renderNav()
 					bodyHtml += '	</div>'
 					bodyHtml += '	<div class="mce-fontawesomepicker--content">'
-					bodyHtml += 		this.renderIcons()
+					bodyHtml += this.renderIcons()
 					bodyHtml += '	</div>'
 					bodyHtml += '</div>'
 					return bodyHtml
 				},
-				toIconClass: function(name) {
+				toIconClass: function (name) {
 					var prefix = name.split('-')[0]
 					var icon = name.replace(prefix, prefix + ' fa')
 					return icon
 				},
-				showIcons: function(category) {
+				showIcons: function (category) {
 					var data = categories[category]
-					if ( !data ) return
+					if (!data) return
 					editor.$('.mce-fontawesomepicker--icon', document)
-					.each(function(el) {
-						var title = this.getAttribute('title')
-						this.style.display = data.icons.includes(title) ? 'block' : 'none'
-					})
+						.each(function (el) {
+							var title = this.getAttribute('title')
+							this.style.display = data.icons.includes(title) ? 'block' : 'none'
+						})
 				},
-				changeNav: function(category) {
+				changeNav: function (category) {
 					var $current = document.querySelector('.mce-fontawesomepicker--nav__item.current')
-					var $category = document.querySelector('.mce-fontawesomepicker--nav__item[title="'+ category +'"]')
-					if ( $current ) $current.classList.remove('current')
-					if ( $category ) $category.classList.add('current')
+					var $category = document.querySelector('.mce-fontawesomepicker--nav__item[title="' + category + '"]')
+					if ($current) $current.classList.remove('current')
+					if ($category) $category.classList.add('current')
 					this.showIcons(category)
 				},
-				insertIcon: function(name) {
+				insertIcon: function (name) {
 					var icon = this.toIconClass(name)
-		
+
 					// Empty tags will be automatically deleted
 					// Use <!--. --> to placeholder
-					var html = ' <span class="mark-fapkw"><!-- . --><span contenteditable="false" class="mark-fapk '+ icon +'"></span></span> '
+					var html = ' <span class="mark-fapkw"><!-- . --><span contenteditable="false" class="mark-fapk ' + icon + '"></span></span> '
 					editor.execCommand('mceInsertContent', false, html)
 					editor.windowManager.close()
 				}
@@ -180,53 +195,137 @@
 		}
 	}
 
-	var SettingPanel = function(editor) {
+	var SettingPanel = function (editor) {
 		var target = utils.getRngNode(editor)
+		var rotate = editor.$(target).css('transform').replace(/(matrix|none|\(|\))/g, '')
+		rotate = utils.getmatrix(rotate.split(',').map(parseFloat))
 
 		editor.windowManager.open({
 			title: 'Icon setting',
 			body: {
 				type: 'panel',
-					items: [
-						{
-							type: 'input',
-							name: 'icon-size',
-							label: 'icon size'
-						},
-						{
-							type: 'colorinput',
-							name: 'icon-color',
-							label: 'icon color'
-						}
-					]
-				},
-				buttons: [
+				items: [
 					{
-						type: 'cancel',
-						name: 'closeButton',
-						text: 'Cancel'
+						type: 'selectbox',
+						name: 'icon-style',
+						label: 'style',
+						items: [
+							{ value: 'none', text: 'None' },
+							{ value: 'rounded', text: 'Circle' },
+							{ value: 'boxed', text: 'Square' },
+							{ value: 'rounded-less', text: 'Rounded' },
+							{ value: 'rounded-outline', text: 'Outline Circle' },
+							{ value: 'boxed-outline', text: 'Outline Square' },
+							{ value: 'rounded-less-outline', text: 'Outline Rounded' },
+						]
 					},
 					{
-						type: 'submit',
-						name: 'submitButton',
-						text: 'change',
-						primary: true
+						type: 'input',
+						name: 'icon-size',
+						label: 'Icon size'
+					},
+					{
+						type: 'colorinput',
+						name: 'icon-color',
+						label: 'Icon color'
+					},
+					{
+						type: 'input',
+						name: 'icon-rotate',
+						label: 'Rotation angle (0deg)'
+					},
+					{
+						type: 'colorinput',
+						name: 'style-color',
+						label: 'Style color'
 					}
-				],
-				initialData: {
-					'icon-size': editor.$(target).css('font-size'),
-					'icon-color': editor.$(target).css('color'),
+				]
+			},
+			buttons: [
+				{
+					type: 'cancel',
+					name: 'closeButton',
+					text: 'Cancel'
 				},
-				onSubmit: function (api) {
-					var data = api.getData()
-
-					editor.$(target).css({
-						'font-size': data['icon-size'],
-						'color': data['icon-color']
-					})
-					// editor.execCommand('mceReplaceContent', false, '')
-					api.close()
+				{
+					type: 'submit',
+					name: 'submitButton',
+					text: 'Change',
+					primary: true
 				}
+			],
+			initialData: {
+				'icon-style': editor.$(target).attr('icon-style') || 'none',
+				'icon-size': editor.$(target).css('font-size'),
+				'icon-color': editor.$(target).css('color') || '',
+				'icon-rotate': rotate + 'deg',
+				'style-color': editor.$(target).attr('style-color') || ''
+			},
+			onSubmit: function (api) {
+				var data = api.getData()
+				var style = {
+					'font-size': data['icon-size'],
+					'color': data['icon-color']
+				}
+
+				editor.$(target)[0].removeAttribute('style')
+				if (![0, '0', '0deg'].includes(data['icon-rotate'])) {
+					style['display'] = 'inline-block'
+
+					style['transform'] = 'rotate(' + data['icon-rotate'] + ')'
+					style['-ms-transform'] = 'rotate(' + data['icon-rotate'] + ')'
+					style['-moz-transform'] = 'rotate(' + data['icon-rotate'] + ')'
+					style['-webkit-transform'] = 'rotate(' + data['icon-rotate'] + ')'
+					style['-o-transform'] = 'rotate(' + data['icon-rotate'] + ')'
+				}
+
+				if ( data['icon-style'] === 'none' ) {
+					editor.$(target)[0].removeAttribute('icon-style')
+					editor.$(target)[0].removeAttribute('style-color')
+				} else {
+					editor.$(target).attr('icon-style', data['icon-style'])
+					editor.$(target).attr('style-color', data['style-color'])
+					style['display'] = 'inline-block'
+					style['text-align'] = 'center'
+					style['width'] = style['height'] = style['line-height'] = '1.4em'
+
+					switch ( data['icon-style'] ) {
+						case 'rounded': {
+							style['border-radius'] = '50%'
+							style['background-color'] = data['style-color']
+							break
+						}
+						case 'boxed': {
+							style['background-color'] = data['style-color']
+							break
+						}
+						case 'rounded-less': {
+							style['border-radius'] = '5px'
+							style['background-color'] = data['style-color']
+							break
+						}
+						case 'rounded-outline': {
+							style['border-radius'] = '5px'
+							style['border'] = '2px solid ' + data['style-color']
+							break
+						}
+						case 'boxed-outline': {
+							style['border'] = '2px solid ' + data['style-color']
+							break
+						}
+						case 'rounded-less-outline': {
+							style['border-radius'] = '5px'
+							style['border'] = '2px solid ' + data['style-color']
+							break
+						}
+					}
+				}
+
+				editor.$(target).css(style)
+				// editor.execCommand('mceReplaceContent', false, '')
+				api.close()
+			}
+
 		})
 	}
 
@@ -258,12 +357,10 @@
 		editor.ui.registry.addContextMenu('fontawesomesetting', {
 			update: function (element) {
 				var classList = element.classList
-				if ( classList.contains('mark-fapk') || classList.contains('mark-fapkw') ) return 'fontawesomesetting'
+				if (classList.contains('mark-fapk') || classList.contains('mark-fapkw')) return 'fontawesomesetting'
 				return ''
 			}
 		})
-
-
 	}
 
 	var Icons = IconsPanel()
