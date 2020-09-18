@@ -1,6 +1,6 @@
 {
   "name": "tinymce-fontawesomepicker",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "repository": "https://github.com/so-diao/tinymce-fontawesomepicker",
   "description": "A plugin for tinymce5 that selects the fontawesome icon.",
   "main": "index.js",
@@ -13,7 +13,6 @@
   "author": "so-diao",
   "license": "MIT",
   "scripts": {
-    "publish": "npm publish",
     "patch": "npm version patch & npm publish",
     "minor": "npm version minor & npm publish",
     "major": "npm version major & npm publish",

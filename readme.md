@@ -31,4 +31,5 @@ A plugin for `tinymce v5` that selects the `fontawesome` icon.
 
 
 # preview [example](http://gitpages.wo2.me/tinymce-fontawesomepicker/)
-![image](image.png)
+![icons](icons.png)
+
