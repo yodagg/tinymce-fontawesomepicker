@@ -36,8 +36,9 @@ function toNames(name, styles) {
 
 const data = {}
 
-for ( const name in rawIcons ) {
-    if ( rawIcons[name].private ) break
+const keys = Object.keys(rawIcons)
+keys.forEach(name =>{
+    if ( rawIcons[name].private ) return
     const styles = rawIcons[name].styles
     const categories = getCategories(name)
 
@@ -49,7 +50,8 @@ for ( const name in rawIcons ) {
 
         data[item].icons.push(...toNames(name, styles))
     })
-}
+})
+
 
 // `Others' should be put last 
 const others = data.others
