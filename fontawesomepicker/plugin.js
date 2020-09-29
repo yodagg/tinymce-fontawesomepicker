@@ -209,7 +209,7 @@
 					{
 						type: 'selectbox',
 						name: 'icon-style',
-						label: 'style',
+						label: 'Style',
 						items: [
 							{ value: 'none', text: 'None' },
 							{ value: 'rounded', text: 'Circle' },
