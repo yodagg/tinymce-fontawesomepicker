@@ -59,12 +59,14 @@
 		var bodyHtml = ''
 
 		function initAsset(editor, pluginUrl) {
-			if (categories.all) return
 			var fontawesomeUrl = editor.getParam('fontawesomeUrl')
-			loadCategories(pluginUrl)
 			utils.loadStyle(document, fontawesomeUrl)
 			utils.loadStyle(document, pluginUrl + '/asset/style.css')
 			utils.loadStyle(editor.contentDocument, fontawesomeUrl)
+
+			if ( !categories.all ) {
+				loadCategories(pluginUrl)
+			}
 		}
 
 		function loadCategories(pluginUrl) {
