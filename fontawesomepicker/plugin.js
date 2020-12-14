@@ -4,6 +4,7 @@
 	var PLUGIN_NAME = 'fontawesomepicker'
 	var CALLBACK_NAME = 'fontawesomepickerCallback'
 	var global = tinymce.util.Tools.resolve('tinymce.PluginManager')
+	var jsonpCache = {}
 
 	var utils = {
 		loadStyle: function (doc, src) {
@@ -27,17 +28,41 @@
 			return target
 		},
 		jsonp: function (url, callbackName, callback) {
-			var script = document.createElement('script')
-			script.src = url
-			script.charset = 'utf-8'
-			document.head.appendChild(script)
-			window[callbackName] = callback
-			script.onload = script.onerror = function () {
-				delete window[callbackName]
-				script.parentNode.removeChild(script)
-			}
+            jsonpCache[url] = jsonpCache[url] || {}
+            var cache = jsonpCache[url]
+
+            //  first
+            //  create script
+            if ( !cache.status && !cache.script ) {
+                var js = document.createElement('script')
+                js.src = url
+                document.head.appendChild(js)
+                cache.status = 0
+                cache.script = js
+                window[callbackName] = function(data) {
+                    cache.status = 1
+                    cache.data = data
+                }
+                cache.script.onload = cache.script.onerror = function() {
+                    delete window[callbackName]
+                    delete cache.script
+                    this.parentNode && this.parentNode.removeChild(this)
+                }
+            }
+
+            //  pending
+            if ( !cache.status && cache.script ) {
+                cache.script.addEventListener('load', function() {
+                    callback(cache.data)
+                })
+            }
+
+            //  read cache
+            if ( cache.status ) {
+                callback(cache.data)
+            }
 		},
-		getmatrix(args) {
+		getmatrix: function(args) {
 			var aa = Math.round(180 * Math.asin(args[0]) / Math.PI)
 			var bb = Math.round(180 * Math.acos(args[1]) / Math.PI)
 			var cc = Math.round(180 * Math.asin(args[2]) / Math.PI)
