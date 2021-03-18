@@ -85,8 +85,15 @@
 
 		function initAsset(editor, pluginUrl) {
 			var fontawesomeUrl = editor.getParam('fontawesomeUrl')
+			var fontawesomePro = editor.getParam('fontawesomePro')
 			utils.loadStyle(document, fontawesomeUrl)
 			utils.loadStyle(document, pluginUrl + '/asset/style.css')
+			if (fontawesomePro === undefined || fontawesomePro === false) {
+				utils.loadStyle(document, pluginUrl + '/asset/style-free.css')
+			}
+			else {
+				utils.loadStyle(document, pluginUrl + '/asset/style-pro.css')
+			}
 			utils.loadStyle(editor.contentDocument, fontawesomeUrl)
 
 			if ( !categories.all ) {
