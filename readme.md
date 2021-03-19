@@ -22,6 +22,7 @@ A plugin for `tinymce v5` that selects the `fontawesome` icon.
         plugins: 'fontawesomepicker',
         toolbar: 'fontawesomepicker',
         fontawesomeUrl: 'https://www.unpkg.com/@fortawesome/fontawesome-free@5.14.0/css/all.min.css',
+        fontawesomePro: true, //default: false, enable or disable Pro vs Free font  
         external_plugins: {
             //  url
             fontawesomepicker: 'https://www.unpkg.com/tinymce-fontawesomepicker/fontawesomepicker/plugin.min.js'
