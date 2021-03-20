@@ -30,7 +30,17 @@ A plugin for `tinymce v5` that selects the `fontawesome` icon.
     })
     ```
 
+### fontawesome-pro
+```js
+window.tinymce.init({
+    selector: 'textarea',
+    plugins: 'fontawesomepicker',
+    toolbar: 'fontawesomepicker',
+    fontawesomeUrl: 'fontawesome-pro/css/all.min.css',
+    fontawesomePro: true
+})
+```
 
-# preview [example](http://gitpages.wo2.me/tinymce-fontawesomepicker/)
+# preview
 ![icons](icons.png)
 

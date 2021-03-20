@@ -86,29 +86,22 @@
 		function initAsset(editor, pluginUrl) {
 			var fontawesomeUrl = editor.getParam('fontawesomeUrl')
 			var fontawesomePro = editor.getParam('fontawesomePro')
+			var fontawesomeVer = !!fontawesomePro ? 'pro' : 'free'
+
 			utils.loadStyle(document, fontawesomeUrl)
 			utils.loadStyle(document, pluginUrl + '/asset/style.css')
-			if (fontawesomePro === undefined || fontawesomePro === false) {
-				utils.loadStyle(document, pluginUrl + '/asset/style-free.css')
-			}
-			else {
-				utils.loadStyle(document, pluginUrl + '/asset/style-pro.css')
-			}
+			utils.loadStyle(document, pluginUrl + '/asset/style-'+ fontawesomeVer +'.css')
 			utils.loadStyle(editor.contentDocument, fontawesomeUrl)
 
 			if ( !categories.all ) {
-				loadCategories(pluginUrl)
+				loadCategories(pluginUrl + '/asset/categories-'+ fontawesomeVer +'.js')
 			}
 		}
 
-		function loadCategories(pluginUrl) {
-			utils.jsonp(
-				pluginUrl + '/asset/categories.js',
-				CALLBACK_NAME,
-				function (data) {
-					formatCategories(data)
-				}
-			)
+		function loadCategories(src) {
+			utils.jsonp(src, CALLBACK_NAME, function(data) {
+				formatCategories(data)
+			})
 		}
 
 		function formatCategories(data) {
