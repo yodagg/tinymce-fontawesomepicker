@@ -11,7 +11,8 @@ A plugin for `tinymce v5` that selects the `fontawesome` icon.
         selector: 'textarea',
         plugins: 'fontawesomepicker',
         toolbar: 'fontawesomepicker',
-        fontawesomeUrl: 'https://www.unpkg.com/@fortawesome/fontawesome-free@5.14.0/css/all.min.css'
+        fontawesomeUrl: 'https://www.unpkg.com/@fortawesome/fontawesome-free@5.14.0/css/all.min.css',
+        fontawesomePro: false, //default: false, enable or disable Pro vs Free font  
     })
     ```
 
@@ -22,7 +23,7 @@ A plugin for `tinymce v5` that selects the `fontawesome` icon.
         plugins: 'fontawesomepicker',
         toolbar: 'fontawesomepicker',
         fontawesomeUrl: 'https://www.unpkg.com/@fortawesome/fontawesome-free@5.14.0/css/all.min.css',
-        fontawesomePro: true, //default: false, enable or disable Pro vs Free font  
+        fontawesomePro: false, //default: false, enable or disable Pro vs Free font  
         external_plugins: {
             //  url
             fontawesomepicker: 'https://www.unpkg.com/tinymce-fontawesomepicker/fontawesomepicker/plugin.min.js'
@@ -30,16 +31,6 @@ A plugin for `tinymce v5` that selects the `fontawesome` icon.
     })
     ```
 
-### fontawesome-pro
-```js
-window.tinymce.init({
-    selector: 'textarea',
-    plugins: 'fontawesomepicker',
-    toolbar: 'fontawesomepicker',
-    fontawesomeUrl: 'fontawesome-pro/css/all.min.css',
-    fontawesomePro: true
-})
-```
 
 # preview
 ![icons](icons.png)
